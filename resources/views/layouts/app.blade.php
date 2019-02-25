@@ -38,7 +38,7 @@
                             <a class="nav-link" href="{{ route('sellers') }}">{{ __('Vendedores') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('sellers') }}">{{ __('Clientes') }}</a>
+                            <a class="nav-link" href="{{ route('customers') }}">{{ __('Clientes') }}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('sellers') }}">{{ __('Productos') }}</a>

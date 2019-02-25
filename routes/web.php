@@ -20,3 +20,5 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/sellers', 'SellerController@index')->name('sellers');
+
+Route::get('/customers', 'CustomerController@index')->name('customers');
