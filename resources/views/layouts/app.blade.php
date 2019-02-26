@@ -22,20 +22,24 @@
 </head>
 <body class="app header-fixed sidebar-fixed sidebar-lg-show">
     <header class="app-header navbar">
+        @auth
         <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
             <span class="navbar-toggler-icon"></span>
         </button>
+        @endauth
         <a class="navbar-brand" href="{{ url('/') }}">
             {{ config('app.name', 'Laravel') }}
         </a>
+        @auth
         <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
             <span class="navbar-toggler-icon"></span>
         </button>
         <ul class="nav navbar-nav d-md-down-none">
             <li class="nav-item px-12">
-                <a class="nav-link" href="#">Dashboard</a>
+                <a class="nav-link" href="{{ route('home') }}">Dashboard</a>
             </li>
         </ul>
+        @endauth
 
         <ul class="nav navbar-nav ml-auto">
             <!-- Authentication Links -->
@@ -70,6 +74,7 @@
     </header>
 
     <div class="app-body">
+        @auth
         <div class="sidebar">
             <nav class="sidebar-nav">
                 <ul class="nav">
@@ -104,6 +109,7 @@
             </nav>
             <button class="sidebar-minimizer brand-minimizer" type="button"></button>
         </div>
+        @endauth
 
         <main class="main">
             @yield('content')
