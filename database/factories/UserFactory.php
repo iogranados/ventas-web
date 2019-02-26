@@ -36,3 +36,11 @@ $factory->define(App\Seller::class, function (Faker $faker) {
         'IMEI' => Str::random(20),
     ];
 });
+
+$factory->define(App\Customer::class, function (Faker $faker) {
+    return [
+        'CODCLI' => $faker->randomNumber(4),
+        'NOMBRE' => $faker->name,
+        'RUCLE' => $faker->numberBetween(10000000000, 99999999999),
+    ];
+});
