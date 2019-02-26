@@ -23,6 +23,10 @@ Route::get('/sellers', 'SellerController@index')->name('sellers');
 
 Route::get('/customers', 'CustomerController@index')->name('customers');
 
+Route::get('/products', 'ProductController@index')->name('products');
+
 Route::get('get-data-sellers', ['as'=>'get.data.sellers','uses'=>'SellerController@getData']);
 
 Route::get('get-data-customers', ['as'=>'get.data.customers','uses'=>'CustomerController@getData']);
+
+Route::get('get-data-products', ['as'=>'get.data.products','uses'=>'ProductController@getData']);

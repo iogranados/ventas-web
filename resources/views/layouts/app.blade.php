@@ -85,7 +85,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('sellers') }}">
+                        <a class="nav-link" href="{{ route('products') }}">
                             <i class="nav-icon cui-speedometer"></i> Productos
                         </a>
                     </li>
