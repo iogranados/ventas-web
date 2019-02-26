@@ -84,3 +84,11 @@ $factory->define(App\Product::class, function (Faker $faker) {
 
     ];
 });
+
+$factory->define(App\Payment::class, function (Faker $faker) {
+    return [
+        'OPERACION' => $faker->randomNumber(4),
+        'PEDIDOVTA' => $faker->randomNumber(4),
+        'ID_PAYMENT' => $faker->numberBetween(10, 9999),
+    ];
+});

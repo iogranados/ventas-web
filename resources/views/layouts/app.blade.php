@@ -100,7 +100,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('sellers') }}">
+                        <a class="nav-link" href="{{ route('payments') }}">
                             <i class="nav-icon cui-speedometer"></i> Pagos a cuenta
                         </a>
                     </li>
