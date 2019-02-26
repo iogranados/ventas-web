@@ -14,6 +14,6 @@ class SellerController extends Controller
     }
 
     public function getData(){
-        return DataTables::of(Seller::all())->make(true);
+        return DataTables::of(Seller::query())->make(true);
     }
 }

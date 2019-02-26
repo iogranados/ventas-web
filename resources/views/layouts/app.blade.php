@@ -9,95 +9,122 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="//code.jquery.com/jquery.js" ></script>
-    <!--<script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js" defer></script>-->
-
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/r-2.2.2/datatables.min.js" defer></script>
-
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <!--<link href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">-->
-    <link href="https://cdn.datatables.net/v/bs4/dt-1.10.18/r-2.2.2/datatables.min.css" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('css/pace.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('js/datatable/DataTables-1.10.18/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('js/datatable/Responsive-2.2.2/css/responsive.bootstrap4.min.css') }}" rel="stylesheet">
+    <link href="https://unpkg.com/@coreui/coreui/dist/css/coreui.min.css" rel="stylesheet">
 </head>
-<body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+<body class="app header-fixed sidebar-fixed sidebar-lg-show">
+    <header class="app-header navbar">
+        <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="{{ url('/') }}">
+            {{ config('app.name', 'Laravel') }}
+        </a>
+        <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <ul class="nav navbar-nav d-md-down-none">
+            <li class="nav-item px-12">
+                <a class="nav-link" href="#">Dashboard</a>
+            </li>
+        </ul>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    @auth
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('sellers') }}">{{ __('Vendedores') }}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('customers') }}">{{ __('Clientes') }}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('sellers') }}">{{ __('Productos') }}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('sellers') }}">{{ __('Ordenes') }}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('sellers') }}">{{ __('Pagos a cuenta') }}</a>
-                        </li>
-                    </ul>
-                    @endauth
+        <ul class="nav navbar-nav ml-auto">
+            <!-- Authentication Links -->
+            @guest
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                </li>
+                @if (Route::has('register'))
+                    <li class="nav-item" style="padding-right: 1em;">
+                        <a class="nav-link" href="{{ route('register') }}">{{ __('Registro') }}</a>
+                    </li>
+                @endif
+            @else
+                <li class="nav-item dropdown" style="padding-right: 1em;">
+                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        {{ Auth::user()->name }} <span class="caret"></span>
+                    </a>
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Registro') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            {{ __('Cerrar sesión') }}
+                        </a>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Cerrar sesión') }}
-                                    </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </div>
+                </li>
+            @endguest
+        </ul>
+    </header>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-        </nav>
+    <div class="app-body">
+        <div class="sidebar">
+            <nav class="sidebar-nav">
+                <ul class="nav">
+                    <li class="nav-title">{{ config('app.name', 'Laravel') }}</li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('sellers') }}">
+                            <i class="nav-icon cui-speedometer"></i> Vendedores
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('customers') }}">
+                            <i class="nav-icon cui-speedometer"></i> Clientes
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('sellers') }}">
+                            <i class="nav-icon cui-speedometer"></i> Productos
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('sellers') }}">
+                            <i class="nav-icon cui-speedometer"></i> Ordenes
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('sellers') }}">
+                            <i class="nav-icon cui-speedometer"></i> Pagos a cuenta
+                        </a>
+                    </li>
 
-        <main class="py-4">
+                </ul>
+            </nav>
+            <button class="sidebar-minimizer brand-minimizer" type="button"></button>
+        </div>
+
+        <main class="main">
             @yield('content')
         </main>
     </div>
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/datatable/jQuery-3.3.1/jquery-3.3.1.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/pace.min.js') }}" defer></script>
+    <script src="{{ asset('js/perfect-scrollbar.min.js') }}" defer></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous" defer></script>
+
+    <script src="{{ asset('js/datatable/DataTables-1.10.18/js/jquery.dataTables.min.js') }}" type="text/javascript" defer></script>
+    <script src="{{ asset('js/datatable/Responsive-2.2.2/js/dataTables.responsive.min.js') }}" type="text/javascript" defer></script>
+    <script src="{{ asset('js/datatable/DataTables-1.10.18/js/dataTables.bootstrap4.min.js') }}" type="text/javascript" defer></script>
+    <script src="{{ asset('js/datatable/Responsive-2.2.2/js/responsive.bootstrap4.min.js') }}" type="text/javascript" defer></script>
+    <script src="https://unpkg.com/@coreui/coreui/dist/js/coreui.min.js" defer></script>
+
+    @yield('script')
+
 </body>
 </html>
