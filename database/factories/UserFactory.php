@@ -28,7 +28,11 @@ $factory->define(App\User::class, function (Faker $faker) {
 
 $factory->define(App\Seller::class, function (Faker $faker) {
     return [
-        'name' => $faker->name,
-        'price' => $faker->randomDigit,
+        'CODVEN' => $faker->randomNumber(4),
+        'NOMVEN' => $faker->name,
+        'DIRVEN' => $faker->streetAddress,
+        'TELE01' => '991283049',
+        'IDVENTA' => $faker->numberBetween(100, 400),
+        'IMEI' => Str::random(20),
     ];
 });
