@@ -9,6 +9,9 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+    <!-- Icons-->
+    <link href="https://unpkg.com/@coreui/icons/css/coreui-icons.min.css" rel="stylesheet">
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
@@ -28,7 +31,9 @@
         </button>
         @endauth
         <a class="navbar-brand" href="{{ url('/') }}">
-            {{ config('app.name', 'Laravel') }}
+
+            <span class="navbar-brand-full">{{ config('app.name', 'Laravel') }}</span>
+            <img class="navbar-brand-minimized" src="{{ asset('svg/sale.svg') }}" width="30" height="30" alt="{{ config('app.name', 'Laravel') }}">
         </a>
         @auth
         <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
@@ -81,27 +86,27 @@
                     <li class="nav-title">{{ config('app.name', 'Laravel') }}</li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('sellers') }}">
-                            <i class="nav-icon cui-speedometer"></i> Vendedores
+                            <i class="nav-icon cui-user"></i> Vendedores
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('customers') }}">
-                            <i class="nav-icon cui-speedometer"></i> Clientes
+                            <i class="nav-icon cui-people"></i> Clientes
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('products') }}">
-                            <i class="nav-icon cui-speedometer"></i> Productos
+                            <i class="nav-icon cui-list"></i> Productos
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('orders') }}">
-                            <i class="nav-icon cui-speedometer"></i> Ordenes
+                            <i class="nav-icon cui-task"></i> Ordenes
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('payments') }}">
-                            <i class="nav-icon cui-speedometer"></i> Pagos a cuenta
+                            <i class="nav-icon cui-dollar"></i> Pagos a cuenta
                         </a>
                     </li>
 
