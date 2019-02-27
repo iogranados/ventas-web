@@ -92,3 +92,24 @@ $factory->define(App\Payment::class, function (Faker $faker) {
         'ID_PAYMENT' => $faker->numberBetween(10, 9999),
     ];
 });
+
+$factory->define(App\Order::class, function (Faker $faker) {
+    $sellers = \App\Seller::all()->pluck('id')->toArray();
+    $customers = \App\Customer::all()->pluck('id')->toArray();
+    return [
+        'codsale' => $faker->randomNumber(4),
+        'codorder' => $faker->randomNumber(4),
+        'dateorder' => $faker->dateTimeThisMonth(),
+        'customer_id' => $faker->randomElement($customers),
+        'seller_id' => $faker->randomElement($sellers),
+        'datedelivery' => $faker->dateTimeThisMonth(),
+        'paymenttype' => $faker-> randomElement(array('01','02')),
+        'receiptType' => $faker-> randomElement(array('1','2', '11')),
+        'imei' => $faker -> randomNumber(8),
+        'latitude' => $faker->randomFloat(6, 1, 9999),
+        'longitude' => $faker->randomFloat(6, 1, 9999),
+        'semaphore' => $faker-> randomElement(array('V','D', 'F')),
+        'PedidoVta' => $faker->randomNumber(4),
+        'PedidoPed' => $faker->randomNumber(4),
+    ];
+});
