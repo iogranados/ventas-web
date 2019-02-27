@@ -95,7 +95,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('sellers') }}">
+                        <a class="nav-link" href="{{ route('orders') }}">
                             <i class="nav-icon cui-speedometer"></i> Ordenes
                         </a>
                     </li>
