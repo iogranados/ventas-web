@@ -41,7 +41,7 @@ $factory->define(App\Customer::class, function (Faker $faker) {
     return [
         'CODCLI' => $faker->randomNumber(4),
         'NOMBRE' => $faker->name,
-        'RUCLE' => $faker->numberBetween(10000000000, 99999999999),
+        'RUCLE' => $faker->numberBetween(1000000, 9999999),
     ];
 });
 
@@ -109,6 +109,28 @@ $factory->define(App\Order::class, function (Faker $faker) {
         'latitude' => $faker->randomFloat(6, 1, 9999),
         'longitude' => $faker->randomFloat(6, 1, 9999),
         'semaphore' => $faker-> randomElement(array('V','D', 'F')),
+        'PedidoVta' => $faker->randomNumber(4),
+        'PedidoPed' => $faker->randomNumber(4),
+    ];
+});
+
+$factory->define(App\OrderItem::class, function (Faker $faker) {
+    $ordersIds = \App\Order::all()->pluck('id')->toArray();
+    $ordersCodeSale = \App\Order::all()->pluck('codsale')->toArray();
+    $products = \App\Product::all()->pluck('id')->toArray();
+    return [
+        'codsale' => $faker->randomElement($ordersCodeSale),
+        'order_id' => $faker->randomElement($ordersIds),
+        'product_id' => $faker->randomElement($products),
+        'quantity' => $faker-> randomFloat(2, 1, 100),
+        'price' => $faker-> randomFloat(3, 1, 200),
+        'typeunit' => '0',
+        'boxby' => 1,
+        'typeprice' => $faker-> randomElement(array('1','2')),
+        'pricetlist' => 1,
+        'codlevel' => $faker-> randomElement(array(1, 2, 3, 4, 5)),
+        'levelrangefrom' => $faker->randomFloat(3, 1, 10),
+        'levelrangeto'=> $faker->randomFloat(3, 11, 100),
         'PedidoVta' => $faker->randomNumber(4),
         'PedidoPed' => $faker->randomNumber(4),
     ];
