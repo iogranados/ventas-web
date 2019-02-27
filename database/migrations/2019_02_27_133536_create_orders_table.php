@@ -15,7 +15,7 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('codsale', 8);
+            $table->string('codsale', 8)->unique();
             $table->string('codorder', 4);
             $table->dateTime('dateorder')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->integer('customer_id')->unsigned();
