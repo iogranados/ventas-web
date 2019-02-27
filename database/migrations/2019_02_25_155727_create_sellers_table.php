@@ -33,7 +33,8 @@ class CreateSellersTable extends Migration
             $table->string('FECFINVIG', 8)->nullable();
             $table->bigInteger('IDVENTA');
             $table->string('IMEI', 25);
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
             $table->unique(array('CODVEN', 'IMEI'));
         });
     }

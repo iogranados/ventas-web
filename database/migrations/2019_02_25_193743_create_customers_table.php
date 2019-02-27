@@ -49,7 +49,8 @@ class CreateCustomersTable extends Migration
             $table->string('ZONA', 2)->nullable();
             $table->string('FECINIVIG', 8)->nullable();
             $table->string('FECFINVIG', 8)->nullable();
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
     }
 

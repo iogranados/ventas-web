@@ -34,7 +34,8 @@ class CreatePaymentsTable extends Migration
             $table->string('ANULADO', 1)->nullable();
             $table->bigInteger('ID_PAYMENT')->unique();
             $table->integer('IDORIGEN')->nullable();
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
     }
 

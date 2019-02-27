@@ -22,7 +22,8 @@ class CreateUsersTable extends Migration
             $table->string('api_token', 60)->unique();
             $table->string('reg_token', 20);
             $table->rememberToken();
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
     }
 

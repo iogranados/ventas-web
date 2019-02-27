@@ -49,7 +49,8 @@ class CreateProductsTable extends Migration
             $table->string('typeunit', 1);
             $table->integer('priceoflist');
             $table->string('flagprice', 1);
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
     }
 
