@@ -19,6 +19,7 @@
                                     <tr>
                                         <th scope="col">Nombre</th>
                                         <th scope="col">Teléfono</th>
+                                        <th scope="col">Imei</th>
                                         <th scope="col">Código</th>
                                     </tr>
                                 </thead>
@@ -47,8 +48,9 @@
                 },
                 ajax: '{!! route('get.data.sellers') !!}',
                 columns: [
-                    { data: 'NOMVEN', name: 'NOMVEN', style: 'word-break: break-word;' },
+                    { data: 'NOMVEN', name: 'NOMVEN' },
                     { data: 'TELE01', name: 'TELE01' },
+                    { data: 'IMEI', name: 'IMEI' },
                     { data: 'CODVEN', name: 'CODVEN' },
                 ]
             });

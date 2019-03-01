@@ -22,6 +22,7 @@
     <link href="{{ asset('js/datatable/DataTables-1.10.18/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
     <link href="{{ asset('js/datatable/Responsive-2.2.2/css/responsive.bootstrap4.min.css') }}" rel="stylesheet">
     <link href="https://unpkg.com/@coreui/coreui/dist/css/coreui.min.css" rel="stylesheet">
+    @yield('style')
 </head>
 <body class="app header-fixed sidebar-fixed sidebar-lg-show">
     <header class="app-header navbar">

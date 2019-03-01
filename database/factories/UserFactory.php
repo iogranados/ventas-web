@@ -38,10 +38,12 @@ $factory->define(App\Seller::class, function (Faker $faker) {
 });
 
 $factory->define(App\Customer::class, function (Faker $faker) {
+    $sellers = \App\Seller::all()->pluck('CODVEN')->toArray();
     return [
         'CODCLI' => $faker->randomNumber(4),
         'NOMBRE' => $faker->name,
         'RUCLE' => $faker->numberBetween(1000000, 9999999),
+        'CODVEN' => $faker->randomElement($sellers),
     ];
 });
 

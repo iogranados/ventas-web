@@ -36,7 +36,7 @@ class CreateCustomersTable extends Migration
             $table->string('TELE02', 15)->nullable();
             $table->string('CELULAR', 15)->nullable();
             $table->string('EMAIL', 100)->nullable();
-            $table->string('CODVEN', 4)->nullable();
+            $table->string('CODVEN', 4);
             $table->string('FECUC', 8)->nullable();
             $table->string('FECUP', 8)->nullable();
             $table->string('CREDITO', 2)->nullable();
@@ -51,6 +51,9 @@ class CreateCustomersTable extends Migration
             $table->string('FECFINVIG', 8)->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
+            $table->foreign('CODVEN')
+                ->references('CODVEN')
+                ->on('sellers');
         });
     }
 

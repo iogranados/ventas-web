@@ -12,6 +12,17 @@
                                 {{ session('status') }}
                             </div>
                         @endif
+                        <form>
+                            <div class="form-group">
+                                <label for="sellers-select">Seleccione un vendedor</label>
+
+                                <select class="js-example-basic-single form-control" name="sellers-select" id="sellers-select">
+                                    <@foreach($sellers as $seller)
+                                        <option id="{{$seller->CODVEN}}">{{$seller->NOMVEN}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </form>
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered display nowrap" style="width:100%" id="customers-table">
                                 <thead>
@@ -29,10 +40,15 @@
         </div>
     </div>
 @endsection
+@section('style')
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 
+@endsection
 @section('script')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js" defer></script>
     <script>
         $(function() {
+            $('.js-example-basic-single').select2({ width: '100%' });
             $('#customers-table').DataTable({
                 responsive: true,
                 language: {
