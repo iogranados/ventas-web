@@ -18,8 +18,15 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">Nombre</th>
-                                        <th scope="col">Precio</th>
+                                        <th scope="col">Fec Ini Vig</th>
+                                        <th scope="col">Fec Fin Vig</th>
+                                        <th scope="col">Caja x</th>
+                                        <th scope="col">Tipo Unidad</th>
+                                        <th scope="col">Fec uv</th>
                                         <th scope="col">Código</th>
+                                        <th scope="col">Precio 1</th>
+                                        <th scope="col">Precio 2</th>
+                                        <th scope="col">Precio 3</th>
                                     </tr>
                                 </thead>
                             </table>
@@ -48,8 +55,15 @@
                 ajax: '{!! route('get.data.products') !!}',
                 columns: [
                     { data: 'name', name: 'name' },
-                    { data: 'priceone', name: 'priceone' },
+                    { data: 'fecIniVig', name: 'fecIniVig' },
+                    { data: 'fecFinVig', name: 'fecFinVig' },
+                    { data: 'boxby', name: 'boxby' },
+                    { data: 'typeunit', name: 'typeunit' },
+                    { data: 'fecUv', name: 'fecUv' },
                     { data: 'codproduct', name: 'codproduct' },
+                    { data: 'priceone', name: 'priceone' },
+                    { data: 'pricetwo', name: 'pricetwo' },
+                    { data: 'pricethree', name: 'pricethree' },
                 ]
             });
         });

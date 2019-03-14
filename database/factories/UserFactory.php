@@ -86,7 +86,9 @@ $factory->define(App\Product::class, function (Faker $faker) {
         'typeunit' => 'U',
         'priceoflist' => 100,
         'flagprice' => '0',
-
+        'fecIniVig' => '20190312',
+        'fecFinVig' => '20190312',
+        'fecUv' => '20190312',
     ];
 });
 
