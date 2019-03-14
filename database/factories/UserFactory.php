@@ -42,7 +42,10 @@ $factory->define(App\Customer::class, function (Faker $faker) {
     return [
         'CODCLI' => $faker->randomNumber(4),
         'NOMBRE' => $faker->name,
+        'CODENTIDAD' => $faker->randomElement(array('6','1','4','7','A','0','-')),
+        'NDOCUMENTO' => $faker->numberBetween(1000000, 9999999),
         'RUCLE' => $faker->numberBetween(1000000, 9999999),
+        'SEMAFORO' => $faker->randomElement(array('V','A','R')),
         'CODVEN' => $faker->randomElement($sellers),
     ];
 });

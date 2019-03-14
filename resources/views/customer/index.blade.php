@@ -18,7 +18,7 @@
 
                                 <select class="js-example-basic-single form-control" name="sellers-select" id="sellers-select">
                                     <@foreach($sellers as $seller)
-                                        <option id="{{$seller->CODVEN}}">{{$seller->NOMVEN}}</option>
+                                        <option value="{{$seller->CODVEN}}">{{$seller->NOMVEN}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -28,8 +28,15 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">Nombre</th>
-                                        <th scope="col">DNI/RUC</th>
-                                        <th scope="col">Código</th>
+                                        <th scope="col">Tipo Doc.</th>
+                                        <th scope="col">Número Doc.</th>
+                                        <th scope="col">Semáforo</th>
+                                        <th scope="col">Dirección</th>
+                                        <th scope="col">Ubigeo</th>
+                                        <th scope="col">FecUc</th>
+                                        <th scope="col">Zona</th>
+                                        <th scope="col">Fec. Ini Vig</th>
+                                        <th scope="col">Fec. Fin Vig</th>
                                     </tr>
                                 </thead>
                             </table>
@@ -48,8 +55,30 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js" defer></script>
     <script>
         $(function() {
-            $('.js-example-basic-single').select2({ width: '100%' });
-            $('#customers-table').DataTable({
+
+            var data = {
+                id: 'ALL',
+                text: 'Todos'
+            };
+
+            var newOption = new Option(data.text, data.id, true, true);
+
+
+            $('.js-example-basic-single').select2({
+                width: '100%'
+            });
+
+            $('.js-example-basic-single').prepend(newOption).trigger('change');
+
+            $('.js-example-basic-single').on('change.select2', function(e) {
+                dTable.ajax.reload();
+                console.log($('#sellers-select').select2('data')[0].id);
+
+            });
+
+            var dTable = $('#customers-table').DataTable({
+                pageLength: 5,
+                lengthMenu: [[5, 10, 25, 50], [5, 10, 25, 50]],
                 responsive: true,
                 language: {
                     //'url': 'https://cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json'
@@ -60,11 +89,23 @@
                 headers: {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
                 },
-                ajax: '{!! route('get.data.customers') !!}',
+                ajax: {
+                    url: '{!! route('get.data.customers') !!}',
+                    data: function (d){
+                        d.codSeller = $('#sellers-select').select2('data')[0].id;
+                    },
+                },
                 columns: [
                     { data: 'NOMBRE', name: 'NOMBRE' },
-                    { data: 'RUCLE', name: 'RUCLE' },
-                    { data: 'CODCLI', name: 'CODCLI' },
+                    { data: 'dniType', name: 'dniType' },
+                    { data: 'NDOCUMENTO', name: 'NDOCUMENTO' },
+                    { data: 'SEMAFORO', name: 'SEMAFORO' },
+                    { data: 'DIRCLI', name: 'DIRCLI' },
+                    { data: 'UBIGEOCOMPLETO', name: 'UBIGEOCOMPLETO' },
+                    { data: 'FECUP', name: 'FECUP' },
+                    { data: 'ZONA', name: 'ZONA' },
+                    { data: 'FECINIVIG', name: 'FECINIVIG' },
+                    { data: 'FECFINVIG', name: 'FECFINVIG' },
                 ]
             });
         });

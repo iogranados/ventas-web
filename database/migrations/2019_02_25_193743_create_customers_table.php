@@ -24,6 +24,7 @@ class CreateCustomersTable extends Migration
             $table->string('APEMAT', 30)->nullable();
             $table->string('FECNAC', 8)->nullable();
             $table->string('CODENTIDAD', 1)->nullable();
+            $table->string('NDOCUMENTO', 20);
             $table->string('DNI', 8)->nullable();
             $table->string('RUC', 11)->nullable();
             $table->string('PASAPORTE', 15)->nullable();
@@ -32,6 +33,7 @@ class CreateCustomersTable extends Migration
             $table->string('DIRCLI', 80)->nullable();
             $table->string('DIS', 80)->nullable();
             $table->string('UBICLI', 6)->nullable();
+            $table->string('UBIGEOCOMPLETO', 250)->nullable();
             $table->string('TELE01', 15)->nullable();
             $table->string('TELE02', 15)->nullable();
             $table->string('CELULAR', 15)->nullable();
@@ -47,6 +49,8 @@ class CreateCustomersTable extends Migration
             $table->string('RUCLE', 19);
             $table->integer('ACTIVO')->nullable();
             $table->string('ZONA', 2)->nullable();
+            $table->string('ZONAAUX', 6)->nullable();
+            $table->string('SEMAFORO', 1)->nullable();
             $table->string('FECINIVIG', 8)->nullable();
             $table->string('FECFINVIG', 8)->nullable();
             $table->timestamp('created_at')->useCurrent();

@@ -19,8 +19,15 @@ class CustomerController extends Controller
         return view("customer.index")->with('sellers', $sellers);
     }
 
-    public function getData(){
+    public function getData(Request $req){
+        $codSeller = $req->query('codSeller');
+        $customers = [];
+        if($codSeller == 'ALL'){
+            $customers = Customer::all();
+        } else {
+            $customers = Customer::query()->where('CODVEN', $codSeller);
+        }
 
-        return DataTables::of(Customer::all())->make(true);
+        return DataTables::of($customers)->make(true);
     }
 }
