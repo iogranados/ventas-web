@@ -29,6 +29,7 @@ class CreateOrdersTable extends Migration
             $table->string('semaphore', 3);
             $table->bigInteger('PedidoVta');
             $table->bigInteger('PedidoPed');
+            $table->boolean('statusDownloaded');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
             $table->foreign('customer_id')
