@@ -27,8 +27,8 @@ class CreateOrderItemsTable extends Migration
             $table->integer('codlevel')->unsigned();
             $table->decimal('levelrangefrom', 10, 3);
             $table->decimal('levelrangeto', 10, 3);
-            $table->bigInteger('PedidoVta');
-            $table->bigInteger('PedidoPed');
+            $table->bigInteger('PedidoVta')->nullable();
+            $table->bigInteger('PedidoPed')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
             $table->foreign('order_id')

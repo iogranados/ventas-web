@@ -15,4 +15,9 @@ class ProductController extends Controller
     public function getData(){
         return DataTables::of(Product::query())->make(true);
     }
+
+    public function get(Request $req){
+        $products = Product::all();
+        return response()->json($products, 200);
+    }
 }

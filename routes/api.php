@@ -16,3 +16,12 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::get('/customers', ['uses' => 'CustomerController@get']);
+Route::get('/products', ['uses' => 'ProductController@get']);
+Route::get('/sellers', ['uses' => 'SellerController@get']);
+Route::get('/orders', ['uses' => 'OrderController@get']);
+Route::get('/orders/{id}', ['uses' => 'OrderController@getOrder']);
+Route::post('/orders', ['uses' => 'OrderController@createOrder']);
+Route::post('/orders/{id}/items', ['uses' => 'OrderItemController@createOrderItem']);

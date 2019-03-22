@@ -27,8 +27,8 @@ class CreateOrdersTable extends Migration
             $table->float('latitude', 10, 6);
             $table->float('longitude', 10, 6);
             $table->string('semaphore', 3);
-            $table->bigInteger('PedidoVta');
-            $table->bigInteger('PedidoPed');
+            $table->bigInteger('PedidoVta')->nullable();
+            $table->bigInteger('PedidoPed')->nullable();
             $table->boolean('statusDownloaded');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
