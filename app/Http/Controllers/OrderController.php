@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Order;
+use App\OrderItem;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 
@@ -21,7 +22,7 @@ class OrderController extends Controller
     public function createOrder(Request $request){
         if ($request->isJson()){
             $data = $request->json()->all();
-            $order = Order::create([
+            $order = [
                 "codsale" => $data["codsale"],
                 "codorder"=> $data["codorder"],
                 "dateorder"=> $data["dateorder"],
@@ -35,10 +36,33 @@ class OrderController extends Controller
                 "longitude"=> $data["longitude"],
                 "semaphore"=> $data["semaphore"],
                 "statusDownloaded"=> $data["statusDownloaded"],
-            ]);
+            ];
+
+            $order = Order::create($order);
+
+            $items = $data["items"];
+
+            foreach ($items as $item){
+                $itemToInsert = [
+                    "order_id" => $order->id,
+                    "codsale" => $item["codsale"],
+                    "product_id" => $item["product_id"],
+                    "quantity" => $item["quantity"],
+                    "price" => $item["price"],
+                    "typeunit" => $item["typeunit"],
+                    "boxby" => $item["boxby"],
+                    "typeprice" => $item["typeprice"],
+                    "pricetlist" => $item["pricetlist"],
+                    "codlevel" => $item["codlevel"],
+                    "levelrangefrom" => $item["levelrangefrom"],
+                    "levelrangeto" => $item["levelrangeto"],
+                ];
+                $itemToInsert = OrderItem::create($itemToInsert);
+
+            }
+
+
             return response()->json($order, 200);
-
-
 
         }
         return response()->json(['error' => 'Unauthorized'], 401, []);

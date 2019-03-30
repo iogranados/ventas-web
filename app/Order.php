@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-
     protected $fillable = [
         "codsale", "codorder",  "dateorder",
         "customer_id", "seller_id", "datedelivery",
@@ -21,5 +20,9 @@ class Order extends Model
 
     public function customer(){
         return $this->belongsTo('App\Customer');
+    }
+
+    public function items(){
+        return $this->hasMany('App\OrderItem');
     }
 }
