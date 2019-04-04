@@ -9,5 +9,11 @@ return [
         'A' => 'CEDULA',
         '0' => 'NO DOMICILIO',
         '-' => 'VARIOS'
+    ],
+
+    'tables' => [
+        'T001',//sellers
+        'T002',//customers
+        'T003'//products
     ]
 ];

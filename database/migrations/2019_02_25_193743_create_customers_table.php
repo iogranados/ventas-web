@@ -15,6 +15,7 @@ class CreateCustomersTable extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('control_id')->unsigned();
             $table->string('FECING', 8)->nullable();
             $table->string('CODCLI', 8);
             $table->string('NOMBRE', 90)->nullable();
@@ -58,6 +59,9 @@ class CreateCustomersTable extends Migration
             $table->foreign('CODVEN')
                 ->references('CODVEN')
                 ->on('sellers');
+            $table->foreign('control_id')
+                ->references('id')
+                ->on('controls');
         });
     }
 

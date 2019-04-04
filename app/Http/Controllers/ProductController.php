@@ -17,7 +17,16 @@ class ProductController extends Controller
     }
 
     public function get(Request $req){
-        $products = Product::all();
+        if($req->has('controlId')){
+            $products = Product::where('control_id', $req->controlId)->get();
+        } else {
+            $products = Product::all();
+        }
+
+        if($products == null){
+            return response()->json($products, 404);
+        }
+
         return response()->json($products, 200);
     }
 }

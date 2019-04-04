@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Seller;
+use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 
 class SellerController extends Controller
@@ -17,8 +18,17 @@ class SellerController extends Controller
         return DataTables::of(Seller::query())->make(true);
     }
 
-    public function get(){
-        $sellers = Seller::all();
+    public function get(Request $req){
+        if($req->has('controlId')){
+            $sellers = Seller::where('control_id', $req->controlId)->get();
+        } else {
+            $sellers = Seller::all();
+        }
+
+        if($sellers == null){
+            return response()->json($sellers, 404);
+        }
+
         return response()->json($sellers, 200);
     }
 }

@@ -26,8 +26,16 @@ $factory->define(App\User::class, function (Faker $faker) {
     ];
 });
 
-$factory->define(App\Seller::class, function (Faker $faker) {
+$factory->define(App\Control::class, function (Faker $faker) {
     return [
+        'table' => $faker->randomElement(array('T001', 'T002', 'T003'))
+    ];
+});
+
+$factory->define(App\Seller::class, function (Faker $faker) {
+    $controls = App\Control::all()->pluck('id')->toArray();
+    return [
+        'control_id' => $faker->randomElement($controls),
         'CODVEN' => $faker->randomNumber(4),
         'NOMVEN' => $faker->name,
         'DIRVEN' => $faker->streetAddress,
@@ -38,8 +46,10 @@ $factory->define(App\Seller::class, function (Faker $faker) {
 });
 
 $factory->define(App\Customer::class, function (Faker $faker) {
+    $controls = App\Control::all()->pluck('id')->toArray();
     $sellers = \App\Seller::all()->pluck('CODVEN')->toArray();
     return [
+        'control_id' => $faker->randomElement($controls),
         'CODCLI' => $faker->randomNumber(4),
         'NOMBRE' => $faker->name,
         'CODENTIDAD' => $faker->randomElement(array('6','1','4','7','A','0','-')),
@@ -51,7 +61,9 @@ $factory->define(App\Customer::class, function (Faker $faker) {
 });
 
 $factory->define(App\Product::class, function (Faker $faker) {
+    $controls = App\Control::all()->pluck('id')->toArray();
     return [
+        'control_id' => $faker->randomElement($controls),
         'codproduct' => $faker->randomNumber(9),
         'name' => $faker->name,
         'priceone' => $faker->randomNumber(2),

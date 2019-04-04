@@ -15,6 +15,7 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('control_id')->unsigned();
             $table->string('codproduct', 9)->unique();
             $table->string('name', 80);
             $table->decimal('priceone', 10, 3);
@@ -54,6 +55,9 @@ class CreateProductsTable extends Migration
             $table->string('fecUv', 8);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
+            $table->foreign('control_id')
+                ->references('id')
+                ->on('controls');
         });
     }
 

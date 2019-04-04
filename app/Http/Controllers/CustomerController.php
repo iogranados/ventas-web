@@ -33,7 +33,16 @@ class CustomerController extends Controller
     }
 
     public function get(Request $req, Response $res){
-        $customers = Customer::all();
+        if($req->has('controlId')){
+            $customers = Customer::where('control_id', $req->controlId)->get();
+        } else {
+            $customers = Customer::all();
+        }
+
+        if($customers==null){
+            return response()->json($customers, 404);
+        }
+
         return response()->json($customers, 200);
     }
 }
