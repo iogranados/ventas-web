@@ -45,4 +45,21 @@ class CustomerController extends Controller
 
         return response()->json($customers, 200);
     }
+
+    public function getFromRange(Request $req){
+        if($req->has('controlIdFrom') && $req->has('controlIdTo')){
+            $customers =
+                Customer::where('control_id', '>', $req->controlIdFrom)
+                    ->where('control_id', '<=', $req->controlIdTo)
+                    ->get();
+        } else {
+            return response()->json('{"error":"not found"}', 400);
+        }
+
+        if($customers == null){
+            return response()->json($customers, 404);
+        }
+
+        return response()->json($customers, 200);
+    }
 }

@@ -28,7 +28,7 @@ $factory->define(App\User::class, function (Faker $faker) {
 
 $factory->define(App\Control::class, function (Faker $faker) {
     return [
-        'table' => $faker->randomElement(array('T001', 'T002', 'T003'))
+        'tabla' => $faker->randomElement(array('T001', 'T002', 'T003'))
     ];
 });
 

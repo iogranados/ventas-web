@@ -29,4 +29,21 @@ class ProductController extends Controller
 
         return response()->json($products, 200);
     }
+
+    public function getFromRange(Request $req){
+        if($req->has('controlIdFrom') && $req->has('controlIdTo')){
+            $products =
+                Product::where('control_id', '>', $req->controlIdFrom)
+                    ->where('control_id', '<=', $req->controlIdTo)
+                    ->get();
+        } else {
+            return response()->json('{"error":"not found"}', 400);
+        }
+
+        if($products == null){
+            return response()->json($products, 404);
+        }
+
+        return response()->json($products, 200);
+    }
 }

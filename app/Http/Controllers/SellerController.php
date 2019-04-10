@@ -31,4 +31,21 @@ class SellerController extends Controller
 
         return response()->json($sellers, 200);
     }
+
+    public function getFromRange(Request $req){
+        if($req->has('controlIdFrom') && $req->has('controlIdTo')){
+            $sellers =
+                Seller::where('control_id', '>', $req->controlIdFrom)
+            ->where('control_id', '<=', $req->controlIdTo)
+                    ->get();
+        } else {
+            return response()->json('{"error":"not found"}', 400);
+        }
+
+        if($sellers == null){
+            return response()->json($sellers, 404);
+        }
+
+        return response()->json($sellers, 200);
+    }
 }

@@ -16,7 +16,7 @@ class CreateControlsTable extends Migration
     {
         Schema::create('controls', function (Blueprint $table) {
             $table->increments('id');
-            $table->enum("table", \App\TableType::getKeys());
+            $table->enum("tabla", \App\TableType::getKeys());
             $table->timestamps();
 
         });

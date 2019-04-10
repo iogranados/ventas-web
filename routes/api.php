@@ -19,9 +19,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::get('/controls', ['uses' => 'ControlController@get']);
+Route::get('/controls/all', ['uses' => 'ControlController@getAll']);
 Route::get('/customers', ['uses' => 'CustomerController@get']);
+Route::get('/customers/range', ['uses' => 'CustomerController@getFromRange']);
 Route::get('/products', ['uses' => 'ProductController@get']);
+Route::get('/products/range', ['uses' => 'ProductController@getFromRange']);
 Route::get('/sellers', ['uses' => 'SellerController@get']);
+Route::get('/sellers/range', ['uses' => 'SellerController@getFromRange']);
 Route::get('/orders', ['uses' => 'OrderController@get']);
 Route::get('/orders/{id}', ['uses' => 'OrderController@getOrder']);
 Route::post('/orders', ['uses' => 'OrderController@createOrder']);
