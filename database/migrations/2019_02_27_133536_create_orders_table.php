@@ -30,6 +30,7 @@ class CreateOrdersTable extends Migration
             $table->bigInteger('PedidoVta')->nullable();
             $table->bigInteger('PedidoPed')->nullable();
             $table->boolean('statusDownloaded');
+            $table->bigInteger('orderInterna')->default(0);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
             $table->foreign('customer_id')

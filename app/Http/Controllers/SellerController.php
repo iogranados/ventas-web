@@ -48,4 +48,18 @@ class SellerController extends Controller
 
         return response()->json($sellers, 200);
     }
+
+    public function login(Request $req){
+        if($req->has("imei")){
+            $seller = Seller::where("imei", $req->imei)->first();
+        } else {
+            return response()->json('{"error":"not imei"}', 400);
+        }
+
+        if($seller == null){
+            return response()->json('{"error":"not found"}', 400);
+        }
+
+        return response()->json($seller, 200);
+    }
 }

@@ -37,6 +37,7 @@ class OrderController extends Controller
                     "longitude" => $data["longitude"],
                     "semaphore" => $data["semaphore"],
                     "statusDownloaded" => $data["statusDownloaded"],
+                    "orderInterna" => $data["orderInterna"],
                 ];
 
                 $order = Order::create($order);

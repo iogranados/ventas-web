@@ -25,6 +25,7 @@ Route::get('/customers/range', ['uses' => 'CustomerController@getFromRange']);
 Route::get('/products', ['uses' => 'ProductController@get']);
 Route::get('/products/range', ['uses' => 'ProductController@getFromRange']);
 Route::get('/sellers', ['uses' => 'SellerController@get']);
+Route::get('/sellers/login', ['uses' => 'SellerController@login']);
 Route::get('/sellers/range', ['uses' => 'SellerController@getFromRange']);
 Route::get('/orders', ['uses' => 'OrderController@get']);
 Route::get('/orders/{id}', ['uses' => 'OrderController@getOrder']);
