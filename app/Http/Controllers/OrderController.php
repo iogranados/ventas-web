@@ -19,13 +19,64 @@ class OrderController extends Controller
         return DataTables::of($orders)->make(true);
     }
 
+    public function createOrders(Request $req){
+        if ($req->isJson()){
+            try{
+                $dataList = $req->json()->all();
+                $orderList = [];
+                foreach ($dataList as $data){
+                    $order = [
+                        "app_id" => $data["app_id"],
+                        "dateorder" => $data["dateorder"],
+                        "customer_id" => $data["customer_id"],
+                        "seller_id" => $data["seller_id"],
+                        "datedelivery" => $data["datedelivery"],
+                        "paymenttype" => $data["paymenttype"],
+                        "receiptType" => $data["receiptType"],
+                        "imei" => $data["imei"],
+                        "latitude" => $data["latitude"],
+                        "longitude" => $data["longitude"],
+                        "semaphore" => $data["semaphore"],
+                        "statusDownloaded" => $data["statusDownloaded"],
+                        "orderInterna" => $data["orderInterna"],
+                    ];
+
+                    $order = Order::create($order);
+
+                    $items = $data["itemPosts"];
+
+                    foreach ($items as $item) {
+                        $itemToInsert = [
+                            "order_id" => $order->id,
+                            "product_id" => $item["product_id"],
+                            "quantity" => $item["quantity"],
+                            "price" => $item["price"],
+                            "typeunit" => $item["typeunit"],
+                            "boxby" => $item["boxby"],
+                            "typeprice" => $item["typeprice"],
+                            "pricetlist" => $item["pricetlist"],
+                            "codlevel" => $item["codlevel"],
+                            "levelrangefrom" => $item["levelrangefrom"],
+                            "levelrangeto" => $item["levelrangeto"],
+                        ];
+                        OrderItem::create($itemToInsert);
+                    }
+                    array_push($orderList, $order);
+                }
+                return response()->json($orderList, 200);
+            } catch(Exception $e){
+                return response()->json($e->getMessage(), 500);
+            }
+        }
+        return response()->json(['error' => 'Unauthorized'], 401, []);
+    }
+
     public function createOrder(Request $request){
         if ($request->isJson()){
             try {
                 $data = $request->json()->all();
                 $order = [
-                    "codsale" => $data["codsale"],
-                    "codorder" => $data["codorder"],
+                    "app_id" => $data["app_id"],
                     "dateorder" => $data["dateorder"],
                     "customer_id" => $data["customer_id"],
                     "seller_id" => $data["seller_id"],
@@ -47,7 +98,6 @@ class OrderController extends Controller
                 foreach ($items as $item) {
                     $itemToInsert = [
                         "order_id" => $order->id,
-                        "codsale" => $item["codsale"],
                         "product_id" => $item["product_id"],
                         "quantity" => $item["quantity"],
                         "price" => $item["price"],
@@ -59,13 +109,11 @@ class OrderController extends Controller
                         "levelrangefrom" => $item["levelrangefrom"],
                         "levelrangeto" => $item["levelrangeto"],
                     ];
-                    $itemToInsert = OrderItem::create($itemToInsert);
-
+                    OrderItem::create($itemToInsert);
                 }
             } catch (Exception $e){
                 return response()->json($e->getMessage(), 500);
             }
-
 
             return response()->json($order, 200);
 

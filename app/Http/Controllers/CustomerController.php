@@ -32,17 +32,19 @@ class CustomerController extends Controller
         return DataTables::of($customers)->make(true);
     }
 
-    public function get(Request $req, Response $res){
-        if($req->has('controlId')){
+    public function get(Request $req, Response $res)
+    {
+        if ($req->has('controlId')) {
             $customers = Customer::where('control_id', $req->controlId)->get();
-        } else {
+        } else if($req->has('codVen')){
+            $customers = Customer::where('CODVEN', $req->codVen)->get();
+        }else {
             $customers = Customer::all();
         }
 
         if($customers==null){
             return response()->json($customers, 404);
         }
-
         return response()->json($customers, 200);
     }
 

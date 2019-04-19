@@ -30,4 +30,5 @@ Route::get('/sellers/range', ['uses' => 'SellerController@getFromRange']);
 Route::get('/orders', ['uses' => 'OrderController@get']);
 Route::get('/orders/{id}', ['uses' => 'OrderController@getOrder']);
 Route::post('/orders', ['uses' => 'OrderController@createOrder']);
+Route::post('/orders/batch', ['uses' => 'OrderController@createOrders']);
 Route::post('/orders/{id}/items', ['uses' => 'OrderItemController@createOrderItem']);
