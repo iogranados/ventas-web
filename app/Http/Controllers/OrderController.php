@@ -46,6 +46,9 @@ class OrderController extends Controller
                     $items = $data["itemPosts"];
 
                     foreach ($items as $item) {
+                        if($item["typeunit"] == null){
+                            $item["typeunit"] = " ";
+                        }
                         $itemToInsert = [
                             "order_id" => $order->id,
                             "product_id" => $item["product_id"],
@@ -96,6 +99,9 @@ class OrderController extends Controller
                 $items = $data["itemPosts"];
 
                 foreach ($items as $item) {
+                    if($item["typeunit"] == null){
+                        $item["typeunit"] = " ";
+                    }
                     $itemToInsert = [
                         "order_id" => $order->id,
                         "product_id" => $item["product_id"],
