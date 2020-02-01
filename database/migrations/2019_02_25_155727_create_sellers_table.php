@@ -15,7 +15,6 @@ class CreateSellersTable extends Migration
     {
         Schema::create('sellers', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('control_id')->unsigned();
             $table->string('CODEMPRESA', 3)->nullable();
             $table->string('TIPOLOC', 2)->nullable();
             $table->string('CODLOC', 2)->nullable();
@@ -37,9 +36,6 @@ class CreateSellersTable extends Migration
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
             $table->unique(array('CODVEN', 'IMEI'));
-            $table->foreign('control_id')
-                ->references('id')
-                ->on('controls');
         });
     }
 

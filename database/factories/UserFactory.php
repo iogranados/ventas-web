@@ -33,9 +33,7 @@ $factory->define(App\Control::class, function (Faker $faker) {
 });
 
 $factory->define(App\Seller::class, function (Faker $faker) {
-    $controls = App\Control::all()->pluck('id')->toArray();
     return [
-        'control_id' => $faker->randomElement($controls),
         'CODVEN' => $faker->randomNumber(4),
         'NOMVEN' => $faker->name,
         'DIRVEN' => $faker->streetAddress,

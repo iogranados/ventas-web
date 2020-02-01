@@ -50,7 +50,7 @@
                 },
                 ajax: '{!! route('get.data.orders') !!}',
                 columns: [
-                    { data: 'codsale', name: 'codsale' },
+                    { data: 'id', name: 'id' },
                     { data: 'customer.NOMBRE', name: 'customer.NOMBRE' },
                     { data: 'seller.NOMVEN', name: 'seller.NOMVEN' },
                     { data: 'paymenttype', name: 'paymenttype' },

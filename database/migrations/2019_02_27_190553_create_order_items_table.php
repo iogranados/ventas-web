@@ -15,7 +15,6 @@ class CreateOrderItemsTable extends Migration
     {
         Schema::create('order_items', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('codsale', 8);
             $table->integer('order_id')->unsigned();
             $table->integer('product_id')->unsigned();
             $table->decimal('quantity', 6, 2);
@@ -33,9 +32,6 @@ class CreateOrderItemsTable extends Migration
             $table->timestamp('updated_at')->useCurrent();
             $table->foreign('order_id')
                 ->references('id')
-                ->on('orders');
-            $table->foreign('codsale')
-                ->references('codsale')
                 ->on('orders');
             $table->foreign('product_id')
                 ->references('id')

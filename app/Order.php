@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     protected $fillable = [
-        "codsale", "codorder",  "dateorder",
+        "app_id", "dateorder",
         "customer_id", "seller_id", "datedelivery",
         "paymenttype", "receiptType", "imei",
         "latitude", "longitude", "semaphore",
-        "statusDownloaded"
+        "statusDownloaded", "orderInterna"
     ];
 
     public function seller(){
